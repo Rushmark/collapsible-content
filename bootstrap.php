@@ -20,3 +20,10 @@
  */
  
  namespace rushmark\collapsiblecontent;
+ 
+ if ( ! defined( 'ABSPATH' ) ) {
+     die(' oi  what you trying to do ?');
+ }
+ 
+ include( __DIR__ . '/src/shortcode/shortcodes.php');
+ 
