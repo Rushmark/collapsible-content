@@ -21,9 +21,18 @@
  
  namespace rushmark\collapsiblecontent;
  
- if ( ! defined( 'ABSPATH' ) ) {
-     die(' oi  what you trying to do ?');
- }
- 
- include( __DIR__ . '/src/shortcode/shortcodes.php');
+if ( ! defined( 'ABSPATH' ) ) {
+     die( "Oh, silly, there's nothing to see here." );
+}
+
+define( 'COLLAPSIBLE_CONTENT_PLUGIN', __FILE__ );
+define( 'COLLAPSIBLE_CONTENT_DIR', plugin_dir_path( __FILE__ ) );
+$plugin_url = plugin_dir_url( __FILE__ );
+if ( is_ssl() ) {
+     $plugin_url = str_replace( 'http://', 'https://', $plugin_url );
+}
+define( 'COLLAPSIBLE_CONTENT_URL', $plugin_url );
+define( 'COLLAPSIBLE_CONTENT_TEXT_DOMAIN', 'collapsible_content' );
+
+include( __DIR__ . '/src/plugin.php' );
  
