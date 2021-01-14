@@ -27,11 +27,18 @@ function enqueue_assets()
 
     wp_enqueue_script(
         'collapsible-content-plugin-script',
-        COLLAPSIBLE_CONTENT_URL . 'assets/js/jquery.plugin-min.js',
+        COLLAPSIBLE_CONTENT_URL . 'assets/js/jquery.plugin.js',
         array('jquery'),
-        '1.0.0',
+        '1.0.1',
         true
     );
+    
+    $script_parameters = array(
+        'showIcon'    => 'dashicons dashicons-arrow-down-alt2',
+        'hideIcon'    => 'dashicons dashicons-arrow-up-alt2',
+    );
+    
+    wp_localize_script('collapsible-content-plugin-script', 'scriptParameters', $script_parameters);
 }
 
 /**

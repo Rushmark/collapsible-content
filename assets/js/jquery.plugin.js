@@ -1,46 +1,79 @@
-;(function($, window, document, undefined){
+(function($, window, document, undefined){
 	'use strict';
 	
-	var $qaQuestions, $qaAnswers, $qaIcons, 
-		$teaserMessages, $teaserHiddenContents, $teaserIcons;
-	
+	var $visibleContents, $hiddenContents, $icons;
+		
 	var init = function(){
-		$qaQestions = $('.qa--question');
-		$qaAnswers = $qaQuestions.next();
-		$qaIcons = $qaQuestions.find('.qa--icon');
-		$qaQuestions.on('click', {contentType:'qa'}, clickHandler);
-		
-		$teaserMessages = $('.teaser--visible-message');
-		$teaserHiddenContents = $teaserMessages.next();
-		$teaserIcons = $teaserMessages.find('.teaser--icon');
-		$teaserMessages.on('click', {contentType:'teaser'}, cilckHandler);
-	};
-	
-	var clickHandler = function( event ){
-		console.log( event );
-	};
-	
-	function changeIcon(){
-		
+		$visibleContents = $('.collapsible-content--visible');
+		$hiddenContents = $visibleContents.next();
+		$icons = $visibleContents.find('.collapsible-content--icon');
+		$visibleContents.on('click', clickHandler);
 	}
 	
-	function getIndex(){
+	/*
+	 * Click event handler
+	 *
+	 * @param event
+	 *
+	*/
+	var clickHandler = function(){
+		
+		var index = $visibleContents.index( this ), 
+			$hiddenContent = $( $hiddenContents[ index ] ),
+			isHiddenContentShowing = $hiddenContent.is(':visible');
+		
+		
+		if ( isHiddenContentShowing) {
+			//slide it up to hide it
+			$hiddenContent.slideUp( 1000 );
+		} else {
+			// slide down to reveal
+			$hiddenContent.slideDown( 1000 );
+		}
+		
+		// change the icon
+		changeIcon( index, isHiddenContentShowing );
+		
+		
 		
 	}
-	
-	function getHiddenContent(){
+	/*********************
+	* Helper functions
+	**********************/
+
+
+
+	/**
+	* Change icon handler
+	*/
+	function changeIcon( index, isHiddenContentShowing ){
+		var $iconElement = $( $icons[ index ] ),
+		showIcon = $iconElement.data( 'showIcon' ),
+		hideIcon = $iconElement.data( 'hideIcon' ),
+		removeClass, addClass
 		
-	}
+		if (isHiddenContentShowing){
+			addClass = showIcon;
+			removeClass = hideIcon;
+
+		}	 else {
+			addClass = hideIcon;
+			removeClass = showIcon;
+			
+		}
 	
-	function getIcon(){
-		
-	}
 	
+	$iconElement
+		.removeClass( removeClass )
+		.addClass( addClass );
+
+
+	}
 	function getIconClasses(){
 		
 	}
 	
 	$(document).ready(function(){
 		init();
-	});
-})(jQuery, window, document);
+			});
+	})( jQuery, window, document );
