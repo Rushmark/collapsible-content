@@ -1,7 +1,4 @@
 config.codekit3
-node_modules
-.eslintrc.js
-package-lock.json
-package.json
 .DS_Store
 .nova
+
